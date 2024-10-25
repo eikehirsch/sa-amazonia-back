@@ -7,10 +7,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity(name = "denuncia")
 public class DenunciaEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -28,14 +30,18 @@ public class DenunciaEntity {
     private String uf;
 
     @Column(name = "descricao")
-    private String description; 
+    private String description;
 
     @Column(name = "data")
     private LocalDate date;
 
-    private BiologoEntity biologist;
+    @ManyToOne
+    @JoinColumn(name = "biologo_id")
+    private UsuarioEntity biologist;
 
-    private FiscalEntity fiscal;
+    @ManyToOne
+    @JoinColumn(name = "fiscal_id")
+    private UsuarioEntity fiscal;
 
     public long getId() {
         return id;
@@ -93,19 +99,19 @@ public class DenunciaEntity {
         this.date = date;
     }
 
-    public BiologoEntity getBiologist() {
+    public UsuarioEntity getBiologist() {
         return biologist;
     }
 
-    public void setBiologist(BiologoEntity biologist) {
+    public void setBiologist(UsuarioEntity biologist) {
         this.biologist = biologist;
     }
 
-    public FiscalEntity getFiscal() {
+    public UsuarioEntity getFiscal() {
         return fiscal;
     }
 
-    public void setFiscal(FiscalEntity fiscal) {
+    public void setFiscal(UsuarioEntity fiscal) {
         this.fiscal = fiscal;
     }
 }

@@ -2,11 +2,13 @@ package com.example.demo.dtos.req;
 
 import java.time.LocalDate;
 
+import com.example.demo.entities.enums.TipoDenuncia;
+
 public class CreateDenunciaDTO {
     
     private String title;
 
-    private String type;
+    private TipoDenuncia type;
 
     private String location;
 
@@ -16,9 +18,9 @@ public class CreateDenunciaDTO {
 
     private LocalDate date;
 
-    private CreateBiologoDTO biologist;
+    private Long biologistId;
 
-    private CreateFiscalDTO fiscal;
+    private Long fiscalId;
 
     public String getTitle() {
         return title;
@@ -28,11 +30,11 @@ public class CreateDenunciaDTO {
         this.title = title;
     }
 
-    public String getType() {
+    public TipoDenuncia getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TipoDenuncia type) {
         this.type = type;
     }
 
@@ -68,21 +70,19 @@ public class CreateDenunciaDTO {
         this.date = date;
     }
 
-    public CreateBiologoDTO getBiologist() {
-        return biologist;
+    public Long getBiologistId() {
+        return biologistId;
     }
 
-    public void setBiologist(CreateBiologoDTO biologist) {
-        this.biologist = biologist;
+    public void setBiologistId(Long biologistId) {
+        this.biologistId = biologistId;
     }
 
-    public CreateFiscalDTO getFiscal() {
-        return fiscal;
+    public Long getFiscalId() {
+        return fiscalId;
     }
 
-    public void setFiscal(CreateFiscalDTO fiscal) {
-        this.fiscal = fiscal;
-    }
-    
-    
+    public void setFiscalId(Long fiscalId) {
+        this.fiscalId = fiscalId;
+    }  
 }

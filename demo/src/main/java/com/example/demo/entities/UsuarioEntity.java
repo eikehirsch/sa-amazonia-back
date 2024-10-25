@@ -1,20 +1,50 @@
-package com.example.demo.dtos.req;
+package com.example.demo.entities;
 
-public class CreateFiscalDTO {
-    
+import com.example.demo.entities.enums.PerfilUsuario;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity(name = "usuario")
+public class UsuarioEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "nome")
     private String name;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "cpf")
     private String cpf;
 
+    @Column(name = "endereco")
     private String address;
 
+    @Column(name = "telefone")
     private String phone;
 
+    @Column(name = "senha")
     private String password;
 
-    private String confirmPassword;
+    @Enumerated(EnumType.STRING)
+    private PerfilUsuario tipo;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -64,11 +94,11 @@ public class CreateFiscalDTO {
         this.password = password;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
+    public PerfilUsuario getTipo() {
+        return tipo;
     }
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+    public void setTipo(PerfilUsuario tipo) {
+        this.tipo = tipo;
     }
 }
