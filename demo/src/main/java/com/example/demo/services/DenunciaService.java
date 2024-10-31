@@ -1,12 +1,18 @@
 package com.example.demo.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dtos.req.AssociateUsuarioToDenunciaDTO;
 import com.example.demo.dtos.req.CreateDenunciaDTO;
+import com.example.demo.dtos.res.ShowDenunciaDTO;
+import com.example.demo.dtos.res.ShowUsuarioDTO;
 import com.example.demo.entities.DenunciaEntity;
+import com.example.demo.entities.UsuarioEntity;
+import com.example.demo.entities.enums.TipoDenuncia;
 import com.example.demo.repositories.DenunciaRepository;
-import com.example.demo.repositories.UsuarioRepository;
 
 @Service
 public class DenunciaService {
@@ -15,7 +21,7 @@ public class DenunciaService {
     private DenunciaRepository denunciaRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioService usuarioService;
 
     public void createDenuncia(CreateDenunciaDTO dto) {
 
@@ -28,17 +34,67 @@ public class DenunciaService {
         denunciaEntity.setDescription(dto.getDescription());
         denunciaEntity.setUf(dto.getUf());
 
-        // Cria um fiscal
-        // UsuarioEntity usuarioEntity = new UsuarioEntity();
-
-        // Cria um biologo
-
         // Salva denuncia
         try {
             denunciaEntity = denunciaRepository.save(denunciaEntity);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
 
+    public void alterarDenuncia(ShowDenunciaDTO dto, ShowUsuarioDTO biologo, ShowUsuarioDTO fiscal) {
+
+    }
+
+    public ShowDenunciaDTO getDenunciaById(long id) {
+
+        Optional<DenunciaEntity> optionalDenunciaEntity = denunciaRepository.findById(id);
+
+        if (optionalDenunciaEntity.isEmpty()) {
+            //
+        }
+
+        DenunciaEntity denunciaEntity = optionalDenunciaEntity.get();
+
+        ShowDenunciaDTO showDenunciaDTO = new ShowDenunciaDTO();
+        showDenunciaDTO.setId(denunciaEntity.getId());
+        showDenunciaDTO.setTitle(denunciaEntity.getTitle());
+        showDenunciaDTO.setType(TipoDenuncia.valueOf(denunciaEntity.getType()));
+        showDenunciaDTO.setLocation(denunciaEntity.getLocation());
+        showDenunciaDTO.setUf(denunciaEntity.getUf());
+        showDenunciaDTO.setDescription(denunciaEntity.getDescription());
+        showDenunciaDTO.setDate(denunciaEntity.getDate());
+        showDenunciaDTO.setBiologist(denunciaEntity.getBiologist());
+        showDenunciaDTO.setFiscal(denunciaEntity.getFiscal());
+
+        return showDenunciaDTO;
+    }
+
+    public void associateUsuarioToDenuncia(long denunciaId, AssociateUsuarioToDenunciaDTO dto) {
+
+        // Pega o biologo
+        ShowUsuarioDTO biologo = usuarioService.getUsuarioById(dto.getIdBiologist());
+
+        // Pega o fiscal
+        ShowUsuarioDTO fiscal = usuarioService.getUsuarioById(dto.getIdFiscal());
+
+        // Pega a denuncia
+        Optional<DenunciaEntity> optionalDenunciaEntity = denunciaRepository.findById(denunciaId);
+
+        if (optionalDenunciaEntity.isEmpty()) {
+            //
+        }
+
+        DenunciaEntity denunciaEntity = optionalDenunciaEntity.get();
+
+        UsuarioEntity biologoEntity = new UsuarioEntity();
+        biologoEntity.setId(biologo.getId());
+        denunciaEntity.setBiologist(biologoEntity);
+
+        UsuarioEntity fiscalEntity = new UsuarioEntity();
+        fiscalEntity.setId(fiscal.getId());
+        denunciaEntity.setFiscal(fiscalEntity);
+
+        denunciaRepository.save(denunciaEntity);
     }
 }

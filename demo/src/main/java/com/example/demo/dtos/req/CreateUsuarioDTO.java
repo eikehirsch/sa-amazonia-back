@@ -1,57 +1,24 @@
-package com.example.demo.entities;
+package com.example.demo.dtos.req;
 
 import com.example.demo.entities.enums.PerfilUsuario;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+public class CreateUsuarioDTO {
 
-@Entity(name = "usuario")
-public class UsuarioEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(name = "nome")
     private String name;
 
-    @Column(name = "email")
     private String email;
 
-    @Column(name = "cpf")
     private String cpf;
 
-    @Column(name = "endereco")
     private String address;
 
-    @Column(name = "telefone")
     private String phone;
 
-    @Column(name = "area_cobertura")
     private String areaWork;
 
-    @Column(name = "senha")
     private String password;
 
-    @Enumerated(EnumType.STRING)
     private PerfilUsuario tipo;
-
-    // @OneToMany(mappedBy = "")
-    // private DenunciaEntity denunciaEntity;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -93,16 +60,16 @@ public class UsuarioEntity {
         this.phone = phone;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public String getAreaWork() {
         return areaWork;
     }
 
     public void setAreaWork(String areaWork) {
         this.areaWork = areaWork;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
