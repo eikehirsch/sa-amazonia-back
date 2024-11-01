@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,8 +65,10 @@ public class DenunciaService {
         showDenunciaDTO.setUf(denunciaEntity.getUf());
         showDenunciaDTO.setDescription(denunciaEntity.getDescription());
         showDenunciaDTO.setDate(denunciaEntity.getDate());
-        showDenunciaDTO.setBiologist(denunciaEntity.getBiologist());
-        showDenunciaDTO.setFiscal(denunciaEntity.getFiscal());
+        if (denunciaEntity.getBiologist() != null)
+            showDenunciaDTO.setBiologist(new ShowUsuarioDTO(denunciaEntity.getBiologist()));
+        if (denunciaEntity.getFiscal() != null)
+            showDenunciaDTO.setFiscal(new ShowUsuarioDTO(denunciaEntity.getFiscal()));
 
         return showDenunciaDTO;
     }
@@ -96,5 +99,31 @@ public class DenunciaService {
         denunciaEntity.setFiscal(fiscalEntity);
 
         denunciaRepository.save(denunciaEntity);
+    }
+
+    public List<ShowDenunciaDTO> getAllDenuncias() {
+
+        List<DenunciaEntity> denunciasList = denunciaRepository.findAll();
+
+        return denunciasList
+                .stream()
+                .map(denuncia -> {
+
+                    ShowDenunciaDTO showDenunciaDTO = new ShowDenunciaDTO();
+                    showDenunciaDTO.setId(denuncia.getId());
+                    showDenunciaDTO.setTitle(denuncia.getTitle());
+                    showDenunciaDTO.setType(TipoDenuncia.valueOf(denuncia.getType()));
+                    showDenunciaDTO.setLocation(denuncia.getLocation());
+                    showDenunciaDTO.setUf(denuncia.getUf());
+                    showDenunciaDTO.setDescription(denuncia.getDescription());
+                    showDenunciaDTO.setDate(denuncia.getDate());
+                    if (denuncia.getBiologist() != null)
+                        showDenunciaDTO.setBiologist(new ShowUsuarioDTO(denuncia.getBiologist()));
+                    if (denuncia.getFiscal() != null)
+                        showDenunciaDTO.setFiscal(new ShowUsuarioDTO(denuncia.getFiscal()));
+
+                    return showDenunciaDTO;
+
+                }).toList();
     }
 }

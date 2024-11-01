@@ -1,5 +1,7 @@
 package com.example.demo.controlller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,8 @@ import com.example.demo.dtos.res.ShowUsuarioDTO;
 import com.example.demo.entities.UsuarioEntity;
 import com.example.demo.entities.enums.TipoDenuncia;
 import com.example.demo.services.UsuarioService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/usuarios")
@@ -22,7 +26,7 @@ public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
 
-    // GET DENUNCIA
+    // GET USUARIO
     @GetMapping("/{id}")
     public ResponseEntity<?> getUsuario(@PathVariable long id) {
 
@@ -31,7 +35,7 @@ public class UsuarioController {
         return ResponseEntity.status(200).body(usuario);
     }
 
-    // POST
+    // CREATE USUARIO
     @PostMapping("/")
     public ResponseEntity<?> createUsuario(@RequestBody CreateUsuarioDTO dto) {
 
@@ -44,4 +48,31 @@ public class UsuarioController {
 
     }
 
+    // GET ALL USUARIOS
+    @GetMapping("/")
+    public ResponseEntity<?> getAllUsuarios() {
+        
+        List<ShowUsuarioDTO> usuariosList = usuarioService.getAllUsuarios();
+
+        return ResponseEntity.status(200).body(usuariosList);
+    }
+
+    // GET FISCALS WITHOUT DENUNCIA
+    @GetMapping("/fiscalsWithoutDenuncia")
+    public ResponseEntity<?> getFiscalsWithoutDenuncia() {
+        
+        List<ShowUsuarioDTO> fiscalsList = usuarioService.getFiscalsWithoutDenuncia();
+
+        return ResponseEntity.status(200).body(fiscalsList);
+    }
+
+    // GET BIOLOGISTS WITHOUT DENUNCIA
+    @GetMapping("/biologistsWithoutDenuncia")
+    public ResponseEntity<?> getBiologistsWithoutDenuncia() {
+        
+        List<ShowUsuarioDTO> biologistList = usuarioService.getBiologistWithoutDenuncia();
+
+        return ResponseEntity.status(200).body(biologistList);
+    }
+    
 }

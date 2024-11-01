@@ -21,9 +21,9 @@ public class ShowDenunciaDTO {
 
     private LocalDate date;
 
-    private UsuarioEntity biologist;
+    private ShowUsuarioDTO biologist;
 
-    private UsuarioEntity fiscal;
+    private ShowUsuarioDTO fiscal;
 
     public long getId() {
         return id;
@@ -81,19 +81,19 @@ public class ShowDenunciaDTO {
         this.date = date;
     }
 
-    public UsuarioEntity getBiologist() {
+    public ShowUsuarioDTO getBiologist() {
         return biologist;
     }
 
-    public void setBiologist(UsuarioEntity biologist) {
+    public void setBiologist(ShowUsuarioDTO biologist) {
         this.biologist = biologist;
     }
 
-    public UsuarioEntity getFiscal() {
+    public ShowUsuarioDTO getFiscal() {
         return fiscal;
     }
 
-    public void setFiscal(UsuarioEntity fiscal) {
+    public void setFiscal(ShowUsuarioDTO fiscal) {
         this.fiscal = fiscal;
     }
 

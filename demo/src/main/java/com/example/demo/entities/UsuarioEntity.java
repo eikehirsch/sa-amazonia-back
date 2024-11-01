@@ -1,5 +1,7 @@
 package com.example.demo.entities;
 
+import java.util.List;
+
 import com.example.demo.entities.enums.PerfilUsuario;
 
 import jakarta.persistence.Column;
@@ -42,8 +44,11 @@ public class UsuarioEntity {
     @Enumerated(EnumType.STRING)
     private PerfilUsuario tipo;
 
-    // @OneToMany(mappedBy = "")
-    // private DenunciaEntity denunciaEntity;
+    @OneToMany(mappedBy = "biologist")
+    private List<DenunciaEntity> denunciasBiologistList;
+
+    @OneToMany(mappedBy = "fiscal")
+    private List<DenunciaEntity> denunciasFiscalList;
 
     public long getId() {
         return id;
@@ -115,5 +120,21 @@ public class UsuarioEntity {
 
     public void setTipo(PerfilUsuario tipo) {
         this.tipo = tipo;
+    }
+
+    public List<DenunciaEntity> getDenunciasBiologistList() {
+        return denunciasBiologistList;
+    }
+
+    public void setDenunciasBiologistList(List<DenunciaEntity> denunciasBiologistList) {
+        this.denunciasBiologistList = denunciasBiologistList;
+    }
+
+    public List<DenunciaEntity> getDenunciasFiscalList() {
+        return denunciasFiscalList;
+    }
+
+    public void setDenunciasFiscalList(List<DenunciaEntity> denunciasFiscalList) {
+        this.denunciasFiscalList = denunciasFiscalList;
     }
 }

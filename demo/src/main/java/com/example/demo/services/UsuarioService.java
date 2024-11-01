@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dtos.req.CreateUsuarioDTO;
 import com.example.demo.dtos.res.ShowUsuarioDTO;
 import com.example.demo.entities.UsuarioEntity;
+import com.example.demo.entities.enums.PerfilUsuario;
 import com.example.demo.repositories.UsuarioRepository;
 
 @Service
@@ -47,17 +49,52 @@ public class UsuarioService {
 
         UsuarioEntity usuarioEntity = optionalUsuarioEntity.get();
 
-        ShowUsuarioDTO showUsuarioDTO = new ShowUsuarioDTO();
-        showUsuarioDTO.setId(usuarioEntity.getId());
-        showUsuarioDTO.setName(usuarioEntity.getName());
-        showUsuarioDTO.setEmail(usuarioEntity.getEmail());
-        showUsuarioDTO.setCpf(usuarioEntity.getCpf());
-        showUsuarioDTO.setAddress(usuarioEntity.getAddress());
-        showUsuarioDTO.setPhone(usuarioEntity.getPhone());
-        showUsuarioDTO.setAreaWork(usuarioEntity.getAreaWork());
-        showUsuarioDTO.setPassword(usuarioEntity.getPassword());
-        showUsuarioDTO.setTipo(usuarioEntity.getTipo());
+        ShowUsuarioDTO showUsuarioDTO = new ShowUsuarioDTO(usuarioEntity);
 
         return showUsuarioDTO;
+    }
+
+    public List<ShowUsuarioDTO> getAllUsuarios() {
+
+        List<UsuarioEntity> usuariosList = usuarioRepository.findAll();
+
+        return usuariosList
+                .stream()
+                .map(usuario -> {
+                    ShowUsuarioDTO showUsuarioDTO = new ShowUsuarioDTO(usuario);
+
+                    return showUsuarioDTO;
+                }).toList();
+    }
+
+    public List<ShowUsuarioDTO> getFiscalsWithoutDenuncia() {
+
+        List<UsuarioEntity> allUsuariosList = usuarioRepository.findByTipo(PerfilUsuario.FISCAL);
+       
+        return allUsuariosList
+                .stream()
+                .filter(usuario -> usuario.getDenunciasFiscalList().size() == 0)
+                .map(usuario -> {
+                    ShowUsuarioDTO showUsuarioDTO = new ShowUsuarioDTO(usuario);
+
+                    return showUsuarioDTO;
+
+                }).toList();
+    }
+
+    public List<ShowUsuarioDTO> getBiologistWithoutDenuncia() {
+
+        List<UsuarioEntity> allUsuariosList = usuarioRepository.findByTipo(PerfilUsuario.BIOLOGO);
+
+        return allUsuariosList
+                .stream()
+                .filter(usuario -> usuario.getDenunciasBiologistList().size() == 0)
+                .map(usuario -> {
+
+                    ShowUsuarioDTO showUsuarioDTO = new ShowUsuarioDTO(usuario);
+
+                    return showUsuarioDTO;
+
+                }).toList();
     }
 }

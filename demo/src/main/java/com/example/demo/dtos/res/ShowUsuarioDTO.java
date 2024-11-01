@@ -1,5 +1,8 @@
 package com.example.demo.dtos.res;
 
+import java.util.List;
+
+import com.example.demo.entities.UsuarioEntity;
 import com.example.demo.entities.enums.PerfilUsuario;
 
 public class ShowUsuarioDTO {
@@ -21,6 +24,24 @@ public class ShowUsuarioDTO {
     private String password;
 
     private PerfilUsuario tipo;
+
+    public ShowUsuarioDTO(UsuarioEntity usuario) {
+        if (usuario != null) {
+            this.setId(usuario.getId());
+            this.setName(usuario.getName());
+            this.setEmail(usuario.getEmail());
+            this.setCpf(usuario.getCpf());
+            this.setAddress(usuario.getAddress());
+            this.setPhone(usuario.getPhone());
+            this.setAreaWork(usuario.getAreaWork());
+            this.setPassword(usuario.getPassword());
+            this.setTipo(usuario.getTipo());
+        }
+    }
+
+    // private List<ShowDenunciaDTO> denunciasBiologistList;
+
+    // private List<ShowDenunciaDTO> denunciasFiscalList;
 
     public long getId() {
         return id;
@@ -94,5 +115,21 @@ public class ShowUsuarioDTO {
         this.tipo = tipo;
     }
 
-    
+    // public List<ShowDenunciaDTO> getDenunciasBiologistList() {
+    // return denunciasBiologistList;
+    // }
+
+    // public void setDenunciasBiologistList(List<ShowDenunciaDTO>
+    // denunciasBiologistList) {
+    // this.denunciasBiologistList = denunciasBiologistList;
+    // }
+
+    // public List<ShowDenunciaDTO> getDenunciasFiscalList() {
+    // return denunciasFiscalList;
+    // }
+
+    // public void setDenunciasFiscalList(List<ShowDenunciaDTO> denunciasFiscalList)
+    // {
+    // this.denunciasFiscalList = denunciasFiscalList;
+    // }
 }
