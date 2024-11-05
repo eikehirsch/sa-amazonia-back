@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dtos.req.AlterUsuarioDTO;
 import com.example.demo.dtos.req.CreateUsuarioDTO;
 import com.example.demo.dtos.res.ShowUsuarioDTO;
 import com.example.demo.entities.UsuarioEntity;
@@ -38,6 +39,35 @@ public class UsuarioService {
             System.out.println(e.getMessage());
             throw new Exception();
         }
+    }
+
+    public void alterarUsuario(long usuarioId, AlterUsuarioDTO alterUsuarioDTO) {
+
+        Optional<UsuarioEntity> optionalUsuarioEntity = usuarioRepository.findById(usuarioId);
+
+        if (optionalUsuarioEntity.isEmpty()) {
+            // retorne que nao encontrou
+        }
+
+        UsuarioEntity usuarioEntity = optionalUsuarioEntity.get();
+        usuarioEntity.setEmail(alterUsuarioDTO.getEmail());
+        usuarioEntity.setAddress(alterUsuarioDTO.getAddress());
+        usuarioEntity.setPhone(alterUsuarioDTO.getPhone());
+        usuarioEntity.setAreaWork(alterUsuarioDTO.getAreaWork());
+
+        usuarioRepository.save(usuarioEntity);
+    }
+
+    public void alterarStatusUSuario(long usuarioId, boolean statusUsuario) {
+
+        Optional<UsuarioEntity> optionalUsuarioEntity = usuarioRepository.findById(usuarioId);
+
+        if (optionalUsuarioEntity.isEmpty()) {
+            // retorne que nao encontrou
+        }
+
+        UsuarioEntity usuarioEntity = optionalUsuarioEntity.get();
+        usuarioEntity.setIsActive(statusUsuario);
     }
 
     public ShowUsuarioDTO getUsuarioById(long id) {

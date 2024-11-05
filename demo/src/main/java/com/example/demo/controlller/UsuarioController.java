@@ -5,19 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dtos.req.AlterUsuarioDTO;
 import com.example.demo.dtos.req.CreateUsuarioDTO;
 import com.example.demo.dtos.res.ShowUsuarioDTO;
 import com.example.demo.entities.UsuarioEntity;
 import com.example.demo.entities.enums.TipoDenuncia;
 import com.example.demo.services.UsuarioService;
 import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
 @RequestMapping("/usuarios")
@@ -48,10 +49,36 @@ public class UsuarioController {
 
     }
 
+    // PATCH
+    @PatchMapping("/{usuarioId}")
+    public ResponseEntity<?> alterUsuario(@PathVariable long usuarioId, @RequestBody AlterUsuarioDTO dto) {
+
+        try {
+            usuarioService.alterarUsuario(usuarioId, dto);
+            return ResponseEntity.status(201).build();
+        } catch (Exception e) {
+            // TODO: handle exception
+            return ResponseEntity.status(400).build();
+        }
+    }
+
+    // PATCH
+    @PatchMapping("/{usuarioId}/status")
+    public ResponseEntity<?> alterStatusUsuario(@PathVariable long usuarioId, @PathVariable boolean usuarioStatus) {
+
+        try {
+            usuarioService.alterarStatusUSuario(usuarioId, usuarioStatus);
+            return ResponseEntity.status(201).build();
+        } catch (Exception e) {
+            // TODO: handle exception
+            return ResponseEntity.status(400).build();
+        }
+    }
+
     // GET ALL USUARIOS
     @GetMapping("/")
     public ResponseEntity<?> getAllUsuarios() {
-        
+
         List<ShowUsuarioDTO> usuariosList = usuarioService.getAllUsuarios();
 
         return ResponseEntity.status(200).body(usuariosList);
@@ -60,7 +87,7 @@ public class UsuarioController {
     // GET FISCALS WITHOUT DENUNCIA
     @GetMapping("/fiscalsWithoutDenuncia")
     public ResponseEntity<?> getFiscalsWithoutDenuncia() {
-        
+
         List<ShowUsuarioDTO> fiscalsList = usuarioService.getFiscalsWithoutDenuncia();
 
         return ResponseEntity.status(200).body(fiscalsList);
@@ -69,10 +96,10 @@ public class UsuarioController {
     // GET BIOLOGISTS WITHOUT DENUNCIA
     @GetMapping("/biologistsWithoutDenuncia")
     public ResponseEntity<?> getBiologistsWithoutDenuncia() {
-        
+
         List<ShowUsuarioDTO> biologistList = usuarioService.getBiologistWithoutDenuncia();
 
         return ResponseEntity.status(200).body(biologistList);
     }
-    
+
 }

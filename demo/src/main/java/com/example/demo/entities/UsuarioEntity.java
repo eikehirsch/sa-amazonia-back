@@ -41,6 +41,9 @@ public class UsuarioEntity {
     @Column(name = "senha")
     private String password;
 
+
+    private boolean isActive = true;
+
     @Enumerated(EnumType.STRING)
     private PerfilUsuario tipo;
 
@@ -137,4 +140,13 @@ public class UsuarioEntity {
     public void setDenunciasFiscalList(List<DenunciaEntity> denunciasFiscalList) {
         this.denunciasFiscalList = denunciasFiscalList;
     }
+
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
 }

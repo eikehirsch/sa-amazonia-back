@@ -25,6 +25,8 @@ public class ShowUsuarioDTO {
 
     private PerfilUsuario tipo;
 
+    private boolean isActive;
+
     public ShowUsuarioDTO(UsuarioEntity usuario) {
         if (usuario != null) {
             this.setId(usuario.getId());
@@ -38,10 +40,6 @@ public class ShowUsuarioDTO {
             this.setTipo(usuario.getTipo());
         }
     }
-
-    // private List<ShowDenunciaDTO> denunciasBiologistList;
-
-    // private List<ShowDenunciaDTO> denunciasFiscalList;
 
     public long getId() {
         return id;
@@ -115,21 +113,11 @@ public class ShowUsuarioDTO {
         this.tipo = tipo;
     }
 
-    // public List<ShowDenunciaDTO> getDenunciasBiologistList() {
-    // return denunciasBiologistList;
-    // }
+    public boolean isActive() {
+        return isActive;
+    }
 
-    // public void setDenunciasBiologistList(List<ShowDenunciaDTO>
-    // denunciasBiologistList) {
-    // this.denunciasBiologistList = denunciasBiologistList;
-    // }
-
-    // public List<ShowDenunciaDTO> getDenunciasFiscalList() {
-    // return denunciasFiscalList;
-    // }
-
-    // public void setDenunciasFiscalList(List<ShowDenunciaDTO> denunciasFiscalList)
-    // {
-    // this.denunciasFiscalList = denunciasFiscalList;
-    // }
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
+    }
 }

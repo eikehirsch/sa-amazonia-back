@@ -41,6 +41,7 @@ public class DenunciaEntity {
 
     @ManyToOne
     @JoinColumn(name = "fiscal_id")
+    
     private UsuarioEntity fiscal;
 
     public long getId() {
