@@ -22,6 +22,8 @@ public class CreateDenunciaDTO {
 
     private Long fiscalId;
 
+    private boolean isActive;
+
     public String getTitle() {
         return title;
     }
@@ -84,5 +86,13 @@ public class CreateDenunciaDTO {
 
     public void setFiscalId(Long fiscalId) {
         this.fiscalId = fiscalId;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
     }  
 }

@@ -3,6 +3,7 @@ package com.example.demo.dtos.res;
 import java.time.LocalDate;
 
 import com.example.demo.entities.UsuarioEntity;
+import com.example.demo.entities.enums.StatusDenuncia;
 import com.example.demo.entities.enums.TipoDenuncia;
 
 public class ShowDenunciaDTO {
@@ -24,6 +25,8 @@ public class ShowDenunciaDTO {
     private ShowUsuarioDTO biologist;
 
     private ShowUsuarioDTO fiscal;
+
+    private StatusDenuncia status;
 
     public long getId() {
         return id;
@@ -95,6 +98,14 @@ public class ShowDenunciaDTO {
 
     public void setFiscal(ShowUsuarioDTO fiscal) {
         this.fiscal = fiscal;
+    }
+
+    public StatusDenuncia getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusDenuncia status) {
+        this.status = status;
     }
 
 }

@@ -38,6 +38,7 @@ public class ShowUsuarioDTO {
             this.setAreaWork(usuario.getAreaWork());
             this.setPassword(usuario.getPassword());
             this.setTipo(usuario.getTipo());
+            this.setIsActive(usuario.getIsActive());
         }
     }
 
@@ -113,11 +114,11 @@ public class ShowUsuarioDTO {
         this.tipo = tipo;
     }
 
-    public boolean isActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(boolean isActive) {
+    public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
 }

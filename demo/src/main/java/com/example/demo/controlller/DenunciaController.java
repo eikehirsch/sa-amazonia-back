@@ -63,6 +63,19 @@ public class DenunciaController {
         }
     }
 
+    // PATCH
+    @PatchMapping("/{denunciaId}/status")
+    public ResponseEntity<?> alterStatusDenuncia(@PathVariable long denunciaId, @RequestBody String denunciaStatus) {
+
+        try {
+            denunciaService.alterarStatusDenuncia(denunciaId, denunciaStatus);
+            return ResponseEntity.status(201).build();
+        } catch (Exception e) {
+            // TODO: handle exception
+            return ResponseEntity.status(400).build();
+        }
+    }
+
     // GET ALL DENUNCIAS
     @GetMapping("/")
     public ResponseEntity<?> getAllDenuncias() {

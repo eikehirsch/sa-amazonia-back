@@ -31,6 +31,7 @@ public class UsuarioService {
         usuarioEntity.setAreaWork(dto.getAreaWork());
         usuarioEntity.setPassword(dto.getPassword());
         usuarioEntity.setTipo(dto.getTipo());
+        usuarioEntity.setIsActive(dto.getIsActive());
 
         // Salva usuario
         try {
@@ -68,6 +69,7 @@ public class UsuarioService {
 
         UsuarioEntity usuarioEntity = optionalUsuarioEntity.get();
         usuarioEntity.setIsActive(statusUsuario);
+        usuarioRepository.save(usuarioEntity);
     }
 
     public ShowUsuarioDTO getUsuarioById(long id) {

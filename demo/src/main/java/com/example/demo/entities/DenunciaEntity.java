@@ -2,8 +2,12 @@ package com.example.demo.entities;
 
 import java.time.LocalDate;
 
+import com.example.demo.entities.enums.TipoDenuncia;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,13 +39,16 @@ public class DenunciaEntity {
     @Column(name = "data")
     private LocalDate date;
 
+    @Column(name = "status")
+    private String status;
+
     @ManyToOne
     @JoinColumn(name = "biologo_id")
     private UsuarioEntity biologist;
 
     @ManyToOne
     @JoinColumn(name = "fiscal_id")
-    
+
     private UsuarioEntity fiscal;
 
     public long getId() {
@@ -114,5 +121,13 @@ public class DenunciaEntity {
 
     public void setFiscal(UsuarioEntity fiscal) {
         this.fiscal = fiscal;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

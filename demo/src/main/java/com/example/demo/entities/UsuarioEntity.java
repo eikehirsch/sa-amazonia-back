@@ -41,7 +41,7 @@ public class UsuarioEntity {
     @Column(name = "senha")
     private String password;
 
-
+    @Column(name = "is_active")
     private boolean isActive = true;
 
     @Enumerated(EnumType.STRING)

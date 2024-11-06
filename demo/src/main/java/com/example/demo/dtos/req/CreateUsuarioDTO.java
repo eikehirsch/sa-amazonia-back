@@ -20,6 +20,8 @@ public class CreateUsuarioDTO {
 
     private PerfilUsuario tipo;
 
+    private boolean isActive;
+
     public String getName() {
         return name;
     }
@@ -82,5 +84,13 @@ public class CreateUsuarioDTO {
 
     public void setTipo(PerfilUsuario tipo) {
         this.tipo = tipo;
+    }
+
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 }

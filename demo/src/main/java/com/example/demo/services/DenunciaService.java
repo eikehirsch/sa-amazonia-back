@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.util.Optional;
+import java.lang.StackWalker.Option;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.example.demo.dtos.res.ShowDenunciaDTO;
 import com.example.demo.dtos.res.ShowUsuarioDTO;
 import com.example.demo.entities.DenunciaEntity;
 import com.example.demo.entities.UsuarioEntity;
+import com.example.demo.entities.enums.StatusDenuncia;
 import com.example.demo.entities.enums.TipoDenuncia;
 import com.example.demo.repositories.DenunciaRepository;
 
@@ -47,6 +49,19 @@ public class DenunciaService {
 
     }
 
+    public void alterarStatusDenuncia(long denunciaId, String status) {
+
+        Optional<DenunciaEntity> optionalDenunciaEntity = denunciaRepository.findById(denunciaId);
+
+        if (optionalDenunciaEntity.isEmpty()) {
+            // retorne que nao encontrou
+        }
+
+        DenunciaEntity denunciaEntity = optionalDenunciaEntity.get();
+        denunciaEntity.setStatus(status);
+        denunciaRepository.save(denunciaEntity);
+    }
+
     public ShowDenunciaDTO getDenunciaById(long id) {
 
         Optional<DenunciaEntity> optionalDenunciaEntity = denunciaRepository.findById(id);
@@ -65,6 +80,7 @@ public class DenunciaService {
         showDenunciaDTO.setUf(denunciaEntity.getUf());
         showDenunciaDTO.setDescription(denunciaEntity.getDescription());
         showDenunciaDTO.setDate(denunciaEntity.getDate());
+        showDenunciaDTO.setStatus(StatusDenuncia.valueOf(denunciaEntity.getStatus()));
         if (denunciaEntity.getBiologist() != null)
             showDenunciaDTO.setBiologist(new ShowUsuarioDTO(denunciaEntity.getBiologist()));
         if (denunciaEntity.getFiscal() != null)

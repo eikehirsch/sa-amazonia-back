@@ -64,7 +64,7 @@ public class UsuarioController {
 
     // PATCH
     @PatchMapping("/{usuarioId}/status")
-    public ResponseEntity<?> alterStatusUsuario(@PathVariable long usuarioId, @PathVariable boolean usuarioStatus) {
+    public ResponseEntity<?> alterStatusUsuario(@PathVariable long usuarioId, @RequestBody boolean usuarioStatus) {
 
         try {
             usuarioService.alterarStatusUSuario(usuarioId, usuarioStatus);
