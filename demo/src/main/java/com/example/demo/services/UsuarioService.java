@@ -19,7 +19,7 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public void createUsuario(CreateUsuarioDTO dto) throws Exception {
+    public UsuarioEntity createUsuario(CreateUsuarioDTO dto) throws Exception {
 
         // Cria um usuario
         UsuarioEntity usuarioEntity = new UsuarioEntity();
@@ -34,12 +34,8 @@ public class UsuarioService {
         usuarioEntity.setIsActive(dto.getIsActive());
 
         // Salva usuario
-        try {
-            usuarioEntity = usuarioRepository.save(usuarioEntity);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new Exception();
-        }
+        usuarioEntity = usuarioRepository.save(usuarioEntity);
+        return usuarioEntity;
     }
 
     public void alterarUsuario(long usuarioId, AlterUsuarioDTO alterUsuarioDTO) {
@@ -102,7 +98,7 @@ public class UsuarioService {
     public List<ShowUsuarioDTO> getFiscalsWithoutDenuncia() {
 
         List<UsuarioEntity> allUsuariosList = usuarioRepository.findByTipo(PerfilUsuario.FISCAL);
-       
+
         return allUsuariosList
                 .stream()
                 .filter(usuario -> usuario.getDenunciasFiscalList().size() == 0)

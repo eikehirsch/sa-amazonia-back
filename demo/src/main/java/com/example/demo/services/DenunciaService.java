@@ -26,23 +26,20 @@ public class DenunciaService {
     @Autowired
     private UsuarioService usuarioService;
 
-    public void createDenuncia(CreateDenunciaDTO dto) {
+    public DenunciaEntity createDenuncia(CreateDenunciaDTO dto) {
 
         // Cria uma denuncia
         DenunciaEntity denunciaEntity = new DenunciaEntity();
         denunciaEntity.setTitle(dto.getTitle());
         denunciaEntity.setType(dto.getType().toString());
         denunciaEntity.setLocation(dto.getLocation());
-        denunciaEntity.setDate(dto.getDate());
-        denunciaEntity.setDescription(dto.getDescription());
         denunciaEntity.setUf(dto.getUf());
+        denunciaEntity.setDescription(dto.getDescription());
+        denunciaEntity.setDate(dto.getDate());
 
         // Salva denuncia
-        try {
-            denunciaEntity = denunciaRepository.save(denunciaEntity);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        denunciaEntity = denunciaRepository.save(denunciaEntity);
+        return denunciaEntity;
     }
 
     public void alterarDenuncia(ShowDenunciaDTO dto, ShowUsuarioDTO biologo, ShowUsuarioDTO fiscal) {

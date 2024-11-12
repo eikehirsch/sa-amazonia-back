@@ -20,25 +20,25 @@ public class UsuarioEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false)
     private String name;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "cpf")
+    @Column(name = "cpf", nullable = false)
     private String cpf;
 
-    @Column(name = "endereco")
+    @Column(name = "endereco", nullable = false)
     private String address;
 
-    @Column(name = "telefone")
+    @Column(name = "telefone", nullable = false)
     private String phone;
 
-    @Column(name = "area_cobertura")
+    @Column(name = "area_cobertura", nullable = false)
     private String areaWork;
 
-    @Column(name = "senha")
+    @Column(name = "senha", nullable = false)
     private String password;
 
     @Column(name = "is_active")

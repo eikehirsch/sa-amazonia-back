@@ -21,22 +21,22 @@ public class DenunciaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "titulo")
+    @Column(name = "titulo", nullable = false)
     private String title;
 
-    @Column(name = "tipo")
+    @Column(name = "tipo", nullable = false)
     private String type;
 
-    @Column(name = "localidade")
+    @Column(name = "localidade", nullable = false)
     private String location;
 
-    @Column(name = "uf")
+    @Column(name = "uf", nullable = false)
     private String uf;
 
-    @Column(name = "descricao")
+    @Column(name = "descricao", nullable = false)
     private String description;
 
-    @Column(name = "data")
+    @Column(name = "data", nullable = false)
     private LocalDate date;
 
     @Column(name = "status")
@@ -48,7 +48,6 @@ public class DenunciaEntity {
 
     @ManyToOne
     @JoinColumn(name = "fiscal_id")
-
     private UsuarioEntity fiscal;
 
     public long getId() {
