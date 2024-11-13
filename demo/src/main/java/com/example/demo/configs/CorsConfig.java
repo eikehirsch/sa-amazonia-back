@@ -13,7 +13,7 @@ public class CorsConfig implements WebMvcConfigurer {
         // Permite acesso de todas as origens (*)
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:5173/") // Substitua com a URL do seu frontend
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedMethods("GET", "POST", "PATCH", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
