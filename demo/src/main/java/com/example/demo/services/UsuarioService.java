@@ -30,7 +30,7 @@ public class UsuarioService {
         usuarioEntity.setPhone(dto.getPhone());
         usuarioEntity.setAreaWork(dto.getAreaWork());
         usuarioEntity.setPassword(dto.getPassword());
-        usuarioEntity.setTipo(dto.getTipo());
+        // usuarioEntity.setTipo(dto.getTipo());
         usuarioEntity.setIsActive(dto.getIsActive());
 
         // Salva usuario
@@ -97,7 +97,7 @@ public class UsuarioService {
 
     public List<ShowUsuarioDTO> getFiscalsWithoutDenuncia() {
 
-        List<UsuarioEntity> allUsuariosList = usuarioRepository.findByTipo(PerfilUsuario.FISCAL);
+        List<UsuarioEntity> allUsuariosList = usuarioRepository.findByRole_Name("3");
 
         return allUsuariosList
                 .stream()
@@ -112,7 +112,7 @@ public class UsuarioService {
 
     public List<ShowUsuarioDTO> getBiologistWithoutDenuncia() {
 
-        List<UsuarioEntity> allUsuariosList = usuarioRepository.findByTipo(PerfilUsuario.BIOLOGO);
+        List<UsuarioEntity> allUsuariosList = usuarioRepository.findByRole_Name("2");
 
         return allUsuariosList
                 .stream()

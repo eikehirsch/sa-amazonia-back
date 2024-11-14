@@ -23,7 +23,7 @@ public class ShowUsuarioDTO {
 
     private String password;
 
-    private PerfilUsuario tipo;
+    private String tipo;
 
     private boolean isActive;
 
@@ -37,7 +37,7 @@ public class ShowUsuarioDTO {
             this.setPhone(usuario.getPhone());
             this.setAreaWork(usuario.getAreaWork());
             this.setPassword(usuario.getPassword());
-            this.setTipo(usuario.getTipo());
+            this.setTipo(usuario.getRole().getName());
             this.setIsActive(usuario.getIsActive());
         }
     }
@@ -106,11 +106,11 @@ public class ShowUsuarioDTO {
         this.password = password;
     }
 
-    public PerfilUsuario getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(PerfilUsuario tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
