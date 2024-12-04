@@ -40,7 +40,7 @@ public class DenunciaEntity {
     private LocalDate date;
 
     @Column(name = "status")
-    private String status;
+    private String status = "NAOANALISADA";
 
     @ManyToOne
     @JoinColumn(name = "biologo_id")

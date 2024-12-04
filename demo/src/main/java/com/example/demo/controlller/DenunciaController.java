@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dtos.req.AlterDenunciaStatusDTO;
 import com.example.demo.dtos.req.AssociateUsuarioToDenunciaDTO;
 import com.example.demo.dtos.req.CreateDenunciaDTO;
 import com.example.demo.dtos.res.ShowDenunciaDTO;
@@ -63,7 +64,7 @@ public class DenunciaController {
 
     // PATCH
     @PatchMapping("/{denunciaId}/status")
-    public ResponseEntity<?> alterStatusDenuncia(@PathVariable long denunciaId, @RequestBody String denunciaStatus) {
+    public ResponseEntity<?> alterStatusDenuncia(@PathVariable long denunciaId, @RequestBody AlterDenunciaStatusDTO denunciaStatus) {
 
         try {
             denunciaService.alterarStatusDenuncia(denunciaId, denunciaStatus);

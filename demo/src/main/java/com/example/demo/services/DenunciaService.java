@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dtos.req.AlterDenunciaStatusDTO;
 import com.example.demo.dtos.req.AssociateUsuarioToDenunciaDTO;
 import com.example.demo.dtos.req.CreateDenunciaDTO;
 import com.example.demo.dtos.res.ShowDenunciaDTO;
@@ -46,7 +47,7 @@ public class DenunciaService {
 
     }
 
-    public void alterarStatusDenuncia(long denunciaId, String status) {
+    public void alterarStatusDenuncia(long denunciaId, AlterDenunciaStatusDTO status) {
 
         Optional<DenunciaEntity> optionalDenunciaEntity = denunciaRepository.findById(denunciaId);
 
@@ -55,7 +56,7 @@ public class DenunciaService {
         }
 
         DenunciaEntity denunciaEntity = optionalDenunciaEntity.get();
-        denunciaEntity.setStatus(status);
+        denunciaEntity.setStatus(status.getDenunciaStatus());
         denunciaRepository.save(denunciaEntity);
     }
 
@@ -130,6 +131,7 @@ public class DenunciaService {
                     showDenunciaDTO.setUf(denuncia.getUf());
                     showDenunciaDTO.setDescription(denuncia.getDescription());
                     showDenunciaDTO.setDate(denuncia.getDate());
+                    showDenunciaDTO.setStatus(StatusDenuncia.valueOf(denuncia.getStatus()));
                     if (denuncia.getBiologist() != null)
                         showDenunciaDTO.setBiologist(new ShowUsuarioDTO(denuncia.getBiologist()));
                     if (denuncia.getFiscal() != null)

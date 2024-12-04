@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dtos.req.AlterUsuarioDTO;
 import com.example.demo.dtos.req.CreateUsuarioDTO;
 import com.example.demo.dtos.res.ShowUsuarioDTO;
+import com.example.demo.entities.RoleEntity;
 import com.example.demo.entities.UsuarioEntity;
 import com.example.demo.entities.enums.PerfilUsuario;
 import com.example.demo.repositories.UsuarioRepository;
@@ -19,10 +20,14 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    RoleService roleService;
+
     public UsuarioEntity createUsuario(CreateUsuarioDTO dto) throws Exception {
 
         // Cria um usuario
         UsuarioEntity usuarioEntity = new UsuarioEntity();
+        usuarioEntity.setUsername(dto.getUsername());
         usuarioEntity.setName(dto.getName());
         usuarioEntity.setEmail(dto.getEmail());
         usuarioEntity.setCpf(dto.getCpf());
@@ -32,6 +37,9 @@ public class UsuarioService {
         usuarioEntity.setPassword(dto.getPassword());
         // usuarioEntity.setTipo(dto.getTipo());
         usuarioEntity.setIsActive(dto.getIsActive());
+
+        RoleEntity roleEntity = roleService.getRoleByName(dto.getRole());
+        usuarioEntity.setRole(roleEntity);
 
         // Salva usuario
         usuarioEntity = usuarioRepository.save(usuarioEntity);
