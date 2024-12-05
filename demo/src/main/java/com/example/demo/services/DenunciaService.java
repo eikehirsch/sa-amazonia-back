@@ -89,11 +89,18 @@ public class DenunciaService {
 
     public void associateUsuarioToDenuncia(long denunciaId, AssociateUsuarioToDenunciaDTO dto) {
 
+        ShowUsuarioDTO biologo = null;
+        ShowUsuarioDTO fiscal = null;
+
         // Pega o biologo
-        ShowUsuarioDTO biologo = usuarioService.getUsuarioById(dto.getIdBiologist());
+        if (dto.getIdBiologist() != 0) {
+            biologo = usuarioService.getUsuarioById(dto.getIdBiologist());
+        }
 
         // Pega o fiscal
-        ShowUsuarioDTO fiscal = usuarioService.getUsuarioById(dto.getIdFiscal());
+        if (dto.getIdFiscal() != 0) {
+            fiscal = usuarioService.getUsuarioById(dto.getIdFiscal());
+        }
 
         // Pega a denuncia
         Optional<DenunciaEntity> optionalDenunciaEntity = denunciaRepository.findById(denunciaId);
@@ -104,13 +111,17 @@ public class DenunciaService {
 
         DenunciaEntity denunciaEntity = optionalDenunciaEntity.get();
 
-        UsuarioEntity biologoEntity = new UsuarioEntity();
-        biologoEntity.setId(biologo.getId());
-        denunciaEntity.setBiologist(biologoEntity);
+        if (dto.getIdBiologist() != 0) {
+            UsuarioEntity biologoEntity = new UsuarioEntity();
+            biologoEntity.setId(biologo.getId());
+            denunciaEntity.setBiologist(biologoEntity);
+        }
 
-        UsuarioEntity fiscalEntity = new UsuarioEntity();
-        fiscalEntity.setId(fiscal.getId());
-        denunciaEntity.setFiscal(fiscalEntity);
+        if (dto.getIdFiscal() != 0) {
+            UsuarioEntity fiscalEntity = new UsuarioEntity();
+            fiscalEntity.setId(fiscal.getId());
+            denunciaEntity.setFiscal(fiscalEntity);
+        }
 
         denunciaRepository.save(denunciaEntity);
     }
