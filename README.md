@@ -44,6 +44,14 @@ Rotas das denúncias:
 
 > A rota '/denuncias/' (GET) foi desenvolvida para trazer do banco todas as denúncias.
 
+Rotas dos usuários:
+> A rota '/usuarios/{id}' (GET) foi desenvolvida para trazer do banco uma usuário especificado pelo id da mesmo.
+
+> A rota '/usuarios/' (POST) foi desenvolvida para persistir um novo usuário no banco de dados.
+
+> A rota '/usuarios/{usuarioId}' (PATCH) foi desenvolvida para alterar o status do usuário, podendo ser ativo ou inativo. Esta rota é um soft-delete, logo, ela substitui a existência de uma rota que utilizaria o verbo (DELETE).
+
+> A rota '/usuarios/' (GET) foi desenvolvida para trazer do banco todos os usuários.
 
 </p>
 
