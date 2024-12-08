@@ -31,7 +31,7 @@ O presente projeto foi realizado tendo como objetivo o desenvolvimento de uma ap
 
 <p>O back-end da aplicação EcoVoz foi desenvolvido empregando o conceito de camadas para fins de organização do projeto. A camada de persistência tem classes com sufixo "Repository" que conectarão o endpoint com o banco de dados. A camada de negócios é mantida principalmente por classes com sufixo "Service" que abrigam as regras e validações dos endpoints e por classes com sufixo "Entity" que são os objetos que mapeiam as tabelas do banco. Ainda sobre esta camada, ela é sustentada por classes de suporte como DTOs e enums. Por fim, a camada de visualização é composta por controladores que definem as rotas dos endpoints que empregam verbos HTTP como GET, POST, PUT e PATCH.
 
-Das rotas:
+Sobre as
 
 > A rota '/denuncias/{id}' (GET) foi desenvolvida para trazer do banco uma denúncia especificada pelo id da mesma.
 
