@@ -33,9 +33,16 @@ O presente projeto foi realizado tendo como objetivo o desenvolvimento de uma ap
 
 Das rotas:
 
->A rota '/api/v1/weather-forecast' foi desenvolvida como sendo a principal fonte de dados dinâmicos entre back-end e front-end. Ela possui um método Get para retornar a previsão climática especificamente da cidade de Florianópolis e possui um método Post que retornará a previsão climática das cidades escolhidas no front-end.
+> A rota '/denuncias/{id}' (GET) foi desenvolvida para trazer do banco uma denúncia especificada pelo id da mesma.
 
-> A rota '/api/v1/usersFeedback' foi desenvolvida como se uma fonte de dados estática, ou mock, referente ao feedback que usuários da uClimate já compartilharam para ser consumida na landing page do front-end.
+> A rota '/denuncias/' (POST) foi desenvolvida para persistir uma nova denúncia no banco de dados.
+
+> A rota '/denuncias/{denunciaId}' (PATCH) foi desenvolvida para associar um fiscal e/ou um biólogo em uma denúncia que ainda não o(s) possui.
+
+> A rota '/denuncias/{denunciaId}/status' (PATCH) foi desenvolvida para alterar o status de uma denúncia. Todas as denúncias, quando criadas, recebem por default o valor de status como sendo "Não analisada". Mas ao longo da utilização da aplicação, ela pode ter o valor de status alterado para "Em análise" ou "Analisada".
+
+> A rota '/denuncias/' (GET) foi desenvolvida para trazer do banco todas as denúncias.
+
 
 </p>
 
