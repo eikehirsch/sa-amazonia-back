@@ -53,6 +53,11 @@ Rotas dos usuários:
 
 > A rota '/usuarios/' (GET) foi desenvolvida para trazer do banco todos os usuários.
 
+Rotas dos usuários:
+> A rota '/auth/signup' (POST) foi desenvolvida para cadastrar um usuário novo atrelado à organização de JWT que utilizará o email do mesmo para efetuar o login.
+
+> A rota '/auth/login' (POST) foi desenvolvida para efetuar o login do usuário empregando JWT que utilizará o email do mesmo checar se o login foi efetuado com sucesso e, caso sim, retornar um token para o front-end.
+
 </p>
 
 * [Desenvolvedor](#Desenvolvedor)
